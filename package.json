@@ -1,0 +1,53 @@
+{
+  "name": "devspirits",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=24",
+    "yarn": ">=4.12"
+  },
+  "scripts": {
+    "preinstall": "node -e \"const ua=process.env.npm_config_user_agent||'';if(!/^yarn\\//.test(ua)){console.error('\\n❌ Use yarn to install. Run: yarn install\\n');process.exit(1);}\"",
+    "prepare": "husky",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "security:static": "node scripts/security-check.mjs",
+    "test:unit": "vitest run",
+    "test:e2e": "playwright test",
+    "test": "yarn test:unit && yarn test:e2e"
+  },
+  "dependencies": {
+    "next": "16.1.6",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9",
+    "@next/eslint-plugin-next": "16.1.6",
+    "@playwright/test": "^1.49",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@typescript-eslint/eslint-plugin": "^8",
+    "@typescript-eslint/parser": "^8",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "eslint-config-prettier": "^9",
+    "eslint-import-resolver-typescript": "^3",
+    "eslint-plugin-import": "^2",
+    "eslint-plugin-prettier": "^5",
+    "eslint-plugin-react-hooks": "^5",
+    "eslint-plugin-react-refresh": "^0.4",
+    "eslint-plugin-storybook": "^0.11",
+    "eslint-plugin-unused-imports": "^4",
+    "husky": "^9.1.7",
+    "prettier": "^3",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vitest": "^2.1"
+  }
+}

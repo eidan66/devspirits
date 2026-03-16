@@ -1,0 +1,195 @@
+# DevSpirits – Project Rules & Best Practices
+
+## 1. Project Context & Goals
+
+**DevSpirits** is a landing/SEO/geo page designed to generate leads for freelance developer projects.
+
+- **Primary goal**: Convert visitors into leads (contact form, CTA, bookings)
+- **Secondary goals**: SEO visibility, geo-targeted content, trust signals (portfolio, testimonials, skills)
+- **Tech stack**: Next.js 16, React 19, TypeScript (strict), Tailwind CSS v4
+- **Path aliases**: `@/*` maps to `./*` (project root)
+
+## 1.1. Brand Compliance (CRITICAL)
+
+- **Source of truth:** `docs/brand-brife-en.md`
+- **Cursor rule:** `.cursor/rules/brand-brief.mdc` — ALERT when content, copy, CTAs, or design deviate from the brand brief
+- All user-facing content must align with DevSpirits & IdanLevianDeveloper voice, messaging, and conversion structure
+
+## 2. SEO Best Practices (CRITICAL)
+
+**Metadata & Semantics:**
+
+- Use `generateMetadata` in Server Components for dynamic SEO per page
+- Every page must have unique `title`, `description`, and `keywords`
+- Use semantic HTML: `<main>`, `<section>`, `<article>`, `<header>`, `<footer>`
+- Add `lang` on `<html>` (e.g. `lang="en"` or locale-specific)
+
+**Structured Data:**
+
+- Add JSON-LD for `Person` or `ProfessionalService` where relevant
+- Add `Organization` schema for brand/contact info
+- Use `WebPage` for landing pages when appropriate
+
+**Technical SEO:**
+
+- Use Next.js `Link` for internal navigation (no `href="#"` for CTAs)
+- Ensure fast Core Web Vitals (LCP, FID, CLS)
+- Use `next/image` for all images with proper `alt` and `width`/`height`
+- Prefer static generation where possible: `generateStaticParams`, `generateMetadata`
+
+**Geo-Targeting:**
+
+- Support geo-specific content when relevant (e.g. city/region pages)
+- Use `hreflang` for multi-language/geo variants
+- Consider geo-specific meta descriptions and titles
+
+## 3. Landing Page & Lead Conversion
+
+**Conversion-Focused Design:**
+
+- Clear CTAs above the fold (e.g. "Get a Quote", "Contact", "Book a Call")
+- Minimal friction: short forms, clear value proposition
+- Trust signals: testimonials, portfolio, skills, certifications
+- Mobile-first: forms and CTAs must work well on small screens
+
+**Content Structure:**
+
+- Hero: headline + subheadline + primary CTA
+- Value proposition: what you offer, why it matters
+- Social proof: testimonials, logos, case studies
+- Call-to-action: repeated at logical points
+- Contact: form or clear contact method
+
+**Performance:**
+
+- Avoid heavy client-side JS above the fold
+- Use Server Components for static content
+- Lazy load below-the-fold content when needed
+
+## 4. TypeScript & Strict Mode
+
+- Use `strict: true` in tsconfig.json
+- Prefer `interface` for props and object shapes
+- Use `type` for unions, intersections, and computed types
+- Avoid `any`; use `unknown` and narrow with type guards
+- Use `import type` for type-only imports
+- Use `satisfies` for config objects when appropriate
+
+## 5. React 19 & Next.js 16 App Router
+
+**Server vs Client Components:**
+
+- Default to Server Components (no bundle cost)
+- Use `'use client'` only when needed: interactivity, hooks, browser APIs
+- Keep client boundaries as deep as possible in the tree
+- Use Server Components for: data fetching, metadata, SEO
+
+**Component Patterns:**
+
+- Use functional components only
+- Keep components small and focused
+- Use composition over prop drilling
+
+**Next.js:**
+
+- Use `Link` for internal navigation (never `<a>` for internal routes)
+- Use `next/image` for images
+- Use `generateMetadata` for SEO
+- Use Server Actions for form submissions when possible
+
+## 6. Tailwind CSS v4
+
+**Semantic Tokens:**
+
+- Prefer semantic tokens when defined (e.g. `bg-card`, `text-foreground`)
+- Use `globals.css` for design tokens; avoid raw color values
+
+**Responsive Design:**
+
+- Mobile-first: base styles, then `md:`, `lg:`, `xl:`
+- Test layouts on multiple breakpoints
+
+**Utilities:**
+
+- Use standard utilities over arbitrary values when possible
+- Group related utilities logically
+
+## 7. File Organization
+
+**Structure:**
+
+- `app/` – Next.js App Router pages and layouts
+- `components/` – reusable UI components
+- `lib/` or `utils/` – utilities and helpers
+- `types/` – shared TypeScript types
+- `public/` – static assets (images, favicons)
+
+**Naming:**
+
+- Components: `ComponentName.tsx` (PascalCase)
+- Utilities: `utilityName.ts` (camelCase)
+- Use barrel exports (`index.ts`) for cleaner imports
+
+## 8. Asset Organization
+
+- Assets in `public/` with descriptive, kebab-case names
+- Naming: `descriptive-purpose.format` (e.g. `hero-developer.png`)
+- Avoid generic names (e.g. `image-1.png`)
+- Check for existing assets before adding new ones
+
+## 9. Code Quality & Linting
+
+**ESLint:**
+
+- Run `yarn lint` or `npm run lint` before committing
+- Fix all ESLint errors and warnings
+- No `console.log` in production code
+- No commented-out code
+
+**Prettier:**
+
+- Single quotes
+- 2 spaces indentation
+- Trailing commas
+
+## 10. Common Mistakes to Avoid
+
+**SEO & Conversion:**
+
+- Don’t skip or duplicate metadata across pages
+- Don’t hide or obscure CTAs
+- Don’t use placeholder images without `alt` text
+
+**React/Next.js:**
+
+- Don’t use Client Components when Server Components suffice
+- Don’t use `<a>` for internal navigation
+- Don’t forget `alt` on images
+
+**Accessibility:**
+
+- Include `alt` text on images (empty `alt=""` only for decorative images)
+- Use semantic HTML
+- Ensure keyboard navigation and focus states
+
+## 11. MCP Usage
+
+**Preferred MCPs:**
+
+- **Context7 MCP**: Library docs, framework best practices, code examples
+- **Figma Desktop MCP**: Design implementation, design tokens
+
+**Workflow:**
+
+- Use Context7 for React, Next.js, TypeScript, Tailwind docs
+- Use Figma MCP when implementing from designs
+- Prefer MCPs over web search when available
+
+## 12. Before Committing Checklist
+
+- [ ] `yarn lint` passes with no errors/warnings
+- [ ] `npx tsc --noEmit` passes
+- [ ] Metadata is correct for changed pages
+- [ ] All images have `alt` text
+- [ ] CTAs and forms work as expected
+- [ ] Responsive layout tested on mobile/desktop

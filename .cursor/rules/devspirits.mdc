@@ -1,0 +1,15 @@
+---
+alwaysApply: true
+---
+
+# DevSpirits Project Rules
+
+**Project:** Landing/SEO/geo page for freelance developer leads.
+
+**Tech:** Next.js 16, React 19, TypeScript (strict), Tailwind CSS v4. Path alias: `@/*` → `./*`.
+
+**Priorities:** SEO, lead conversion, geo-targeting, trust signals (portfolio, testimonials).
+
+**Brand:** Follow `docs/brand-brife-en.md` and `.cursor/rules/brand-brief.mdc` — ALERT when content/copy/design is misaligned.
+
+For full standards, see `.cursorrules` at project root.
